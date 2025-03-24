@@ -1,29 +1,33 @@
-import { ContactsCollection } from '../db/models/contacts.js';
+import Contact from '../models/Contact.js';
 
+// Получение всех контактов
 export const getAllContacts = async () => {
-  return await ContactsCollection.find();
+  return await Contact.find();
 };
 
+// Получение контакт ID
 export const getContactById = async (contactId) => {
-  return await ContactsCollection.findById(contactId);
+  return await Contact.findById(contactId);
 };
 
-export const createContact = async (payload) => {
-  return await ContactsCollection.create(payload);
-};
-
-export const updateContact = async (contactId, payload) => {
-  const rawResult = await ContactsCollection.findByIdAndUpdate(
-    contactId,
-    payload,
-    { new: true },
-  );
-
-  return rawResult || null;
-};
-
-export const deleteContact = async (contactId) => {
-  return await ContactsCollection.findOneAndDelete({
-    _id: contactId,
+// Создание контакта
+export const createContact = async ({ name, phoneNumber, email, isFavourite, contactType }) => {
+  const newContact = new Contact({
+    name,
+    phoneNumber,
+    email: email || null,
+    isFavourite: isFavourite ?? false,
+    contactType,
   });
+  return await newContact.save();
+};
+
+// Обновление 
+export const updateContact = async (contactId, updateData) => {
+  return await Contact.findByIdAndUpdate(contactId, updateData, { new: true });
+};
+
+// Удаление 
+export const deleteContact = async (contactId) => {
+  return await Contact.findByIdAndDelete(contactId);
 };
