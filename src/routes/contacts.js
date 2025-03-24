@@ -1,12 +1,19 @@
-import express from 'express';
-import { addContact, patchContact, getAllContactsController, getContactController, deleteContactController } from '../controllers/contacts.js';
+import { Router } from 'express';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import {
+  getContactsController,
+  getContactsByIdController,
+  createContactController,
+  updateContactController,
+  deleteContactController,
+} from '../controllers/contacts.js';
 
-const contactsRouter = express.Router();
+const router = Router();
 
-contactsRouter.get('/', getAllContactsController);
-contactsRouter.get('/:contactId', getContactController);
-contactsRouter.post('/', addContact);
-contactsRouter.patch('/:contactId', patchContact);
-contactsRouter.delete('/:contactId', deleteContactController);
+router.get('/contacts', ctrlWrapper(getContactsController));
+router.get('/contacts/:contactId', ctrlWrapper(getContactsByIdController));
+router.post('/contacts', ctrlWrapper(createContactController));
+router.patch('/contacts/:contactId', ctrlWrapper(updateContactController));
+router.delete('/contacts/:contactId', ctrlWrapper(deleteContactController));
 
-export default contactsRouter;
+export default router;

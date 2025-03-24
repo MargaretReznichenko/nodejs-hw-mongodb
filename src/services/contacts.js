@@ -1,33 +1,29 @@
-import Contact from '../models/Contact.js';
+import { ContactsCollection } from '../db/models/contacts.js';
 
-// Получение всех контактов
 export const getAllContacts = async () => {
-  return await Contact.find();
+  return await ContactsCollection.find();
 };
 
-// Получение контакт ID
 export const getContactById = async (contactId) => {
-  return await Contact.findById(contactId);
+  return await ContactsCollection.findById(contactId);
 };
 
-// Создание контакта
-export const createContact = async ({ name, phoneNumber, email, isFavourite, contactType }) => {
-  const newContact = new Contact({
-    name,
-    phoneNumber,
-    email: email || null,
-    isFavourite: isFavourite ?? false,
-    contactType,
-  });
-  return await newContact.save();
+export const createContact = async (payload) => {
+  return await ContactsCollection.create(payload);
 };
 
-// Обновление 
-export const updateContact = async (contactId, updateData) => {
-  return await Contact.findByIdAndUpdate(contactId, updateData, { new: true });
+export const updateContact = async (contactId, payload) => {
+  const rawResult = await ContactsCollection.findByIdAndUpdate(
+    contactId,
+    payload,
+    { new: true },
+  );
+
+  return rawResult || null;
 };
 
-// Удаление 
 export const deleteContact = async (contactId) => {
-  return await Contact.findByIdAndDelete(contactId);
+  return await ContactsCollection.findOneAndDelete({
+    _id: contactId,
+  });
 };

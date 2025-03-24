@@ -1,14 +1,20 @@
-const errorHandler = (err, req, res, next) => {
-    const statusCode = err.status || 500;
-  
-    res.status(statusCode).json({
-      status: statusCode,
-      message: err.message || 'Something went wrong', 
-      data: err.data || null, 
-      
+import { HttpError } from 'http-errors';
+
+export const errorHandler = (err, req, res, next) => {
+  if (err instanceof HttpError) {
+    res.status(err.status).json({
+      status: err.status,
+      message: err.name,
+      data: err,
     });
-  };
-  
-  export default errorHandler;
+    return;
+  }
+
+  res.status(500).json({
+    status: 500,
+    message: 'Something went wrong',
+    data: err.message,
+  });
+};
   
   
