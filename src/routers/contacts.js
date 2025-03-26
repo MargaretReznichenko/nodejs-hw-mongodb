@@ -10,10 +10,10 @@ import {
 
 const router = Router();
 
-router.get('/contacts', ctrlWrapper(getContactsController));
-router.get('/contacts/:contactId', ctrlWrapper(getContactsByIdController));
-router.post('/contacts', ctrlWrapper(createContactController));
-router.patch('/contacts/:contactId', ctrlWrapper(updateContactController));
-router.delete('/contacts/:contactId', ctrlWrapper(deleteContactController));
+router.get('/', ctrlWrapper(getContactsController));
+router.get('/:contactId', ctrlWrapper(getContactsByIdController));
+router.post('/', ctrlWrapper(createContactController));
+router.patch('/:contactId', ctrlWrapper(updateContactController));
+router.delete('/:contactId', ctrlWrapper(deleteContactController));
 
 export default router;
