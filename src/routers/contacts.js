@@ -9,7 +9,7 @@ import {
 } from '../controllers/contacts.js';
 
 const router = Router();
-
+router.get('/contacts', ctrlWrapper(getContactsController));
 router.get('/', ctrlWrapper(getContactsController));
 router.get('/:contactId', ctrlWrapper(getContactsByIdController));
 router.post('/', ctrlWrapper(createContactController));
