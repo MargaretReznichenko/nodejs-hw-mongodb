@@ -15,7 +15,7 @@ import {
 } from '../controllers/contacts.js';
 
 const router = Router();
-
+router.get('/contacts', ctrlWrapper(getContactsController));
 router.get('/:contactId', isValidId, ctrlWrapper(getContactsByIdController));
 router.post('/', validateBody(createContactSchema), ctrlWrapper(createContactController));
 router.patch('/:contactId', isValidId, validateBody(updateContactSchema), ctrlWrapper(updateContactController));
