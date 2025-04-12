@@ -12,10 +12,10 @@ import {
   SMTP,
   TEMPLATES_DIR,
 } from '../constants/index.js';
-import { SessionsCollection } from '../db/models/session.js';
-import { UsersCollection } from '../db/models/user.js';
 import { getEnvVar } from '../utils/getEnvVar.js';
 import { sendEmail } from '../utils/sendMail.js';
+import { UsersCollection } from '../db/models/user.js';
+import { SessionsCollection } from '../db/models/session.js';
 
 //
 
@@ -108,7 +108,7 @@ export const requestResetToken = async (email) => {
   const user = await UsersCollection.findOne({ email });
 
   if (!user) {
-    throw createHttpError(404, 'User not found');
+    throw createHttpError(401, 'Unauthorized');
   }
 
   const resetToken = jwt.sign(
