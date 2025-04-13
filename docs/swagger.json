@@ -14,7 +14,7 @@
       "url": "http://localhost:3000"
     },
     {
-      "url": "https://contacts-app-gnss.onrender.com"
+      "url": "https://nodejs-hw-mongodb-7a2v.onrender.com"
     }
   ],
   "tags": [
@@ -170,9 +170,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -995,7 +992,7 @@
         ],
         "properties": {
           "_id": {
-            "description": "Contact's id",
+            "description": "Contact's ID",
             "type": "string",
             "example": "65ca67e7ae7f10c88b598384"
           },
@@ -1019,7 +1016,7 @@
           "isFavourite": {
             "description": "Whether the contact is a favorite",
             "type": "boolean",
-            "default": false
+            "example": false
           },
           "contactType": {
             "description": "Type of contact",
@@ -1032,7 +1029,7 @@
             "example": "personal"
           },
           "userId": {
-            "description": "Contact's owner id",
+            "description": "Contact's owner ID",
             "type": "string",
             "example": "65ca67e7ae7f10c88b598384"
           },
